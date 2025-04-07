@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Explorer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <header class="mb-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h1 class="text-4xl font-bold text-indigo-700">YouTube Video Explorer</h1>
+                    <p class="text-gray-600 mt-2">Discover and embed your favorite YouTube videos</p>
+                </div>
+                
+                <!-- Search Form (Would connect to Flask backend in actual implementation) -->
+                <div class="w-full md:w-1/2">
+                    <div class="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+                        <input type="text" id="search-input" placeholder="Search for YouTube videos..." 
+                            class="px-4 py-2 flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button id="search-button" class="bg-indigo-600 text-white px-6 py-2 hover:bg-indigo-700 transition duration-200">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Featured Videos Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Featured Videos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Video 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Never Gonna Give You Up</h3>
+                        <p class="text-gray-600 text-sm">Rick Astley</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-gray-500">3:32</span>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-500 hover:text-red-500"><i class="far fa-heart"></i></button>
+                                <button class="text-gray-500 hover:text-blue-500"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/9bZkp7q19f0" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Gangnam Style</h3>
+                        <p class="text-gray-600 text-sm">PSY</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-gray-500">4:12</span>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-500 hover:text-red-500"><i class="far fa-heart"></i></button>
+                                <button class="text-gray-500 hover:text-blue-500"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/kJQP7kiw5Fk" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Despacito</h3>
+                        <p class="text-gray-600 text-sm">Luis Fonsi ft. Daddy Yankee</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-gray-500">4:41</span>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-500 hover:text-red-500"><i class="far fa-heart"></i></button>
+                                <button class="text-gray-500 hover:text-blue-500"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Videos Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Educational Videos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Educational Video 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/eIrMbAQSU34" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Python for Beginners</h3>
+                        <p class="text-gray-600 text-sm">Programming with Mosh</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-gray-500">1:43:30</span>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-500 hover:text-red-500"><i class="far fa-heart"></i></button>
+                                <button class="text-gray-500 hover:text-blue-500"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Educational Video 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/rfscVS0vtbw" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Python Full Course</h3>
+                        <p class="text-gray-600 text-sm">freeCodeCamp.org</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-gray-500">4:26:52</span>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-500 hover:text-red-500"><i class="far fa-heart"></i></button>
+                                <button class="text-gray-500 hover:text-blue-500"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Educational Video 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/8mAITcNt710" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Harvard CS50 Lecture</h3>
+                        <p class="text-gray-600 text-sm">CS50</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-gray-500">1:54:47</span>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-500 hover:text-red-500"><i class="far fa-heart"></i></button>
+                                <button class="text-gray-500 hover:text-blue-500"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Video Embedding Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Embed Your Own Video</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form id="embed-form" class="mb-6">
+                    <div class="mb-4">
+                        <label for="video-url" class="block text-gray-700 font-medium mb-2">YouTube Video URL</label>
+                        <input type="text" id="video-url" placeholder="https://www.youtube.com/watch?v=..." 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">
+                        Embed Video
+                    </button>
+                </form>
+                
+                <div id="custom-embed-container" class="hidden">
+                    <h3 class="font-bold text-lg mb-4">Your Embedded Video</h3>
+                    <div class="video-container">
+                        <iframe id="custom-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results Section (Hidden initially, shown after search) -->
+        <section id="search-results" class="mb-12 hidden">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Search Results</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="results-container">
+                <!-- Search results will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- MP4 Video Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Local Video Example</h2>
+            <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <div class="p-4">
+                    <video controls playsinline webkit-playsinline class="w-full rounded-lg">
+                        <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Big Buck Bunny</h3>
+                        <p class="text-gray-600">Sample MP4 video for demonstration purposes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-16 border-t border-gray-200 pt-8 pb-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 mb-4 md:mb-0">© 2023 YouTube Video Explorer. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Function to extract YouTube video ID from various URL formats
+        function getYoutubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+        
+        // Handle custom video embedding
+        document.getElementById('embed-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('video-url').value;
+            const videoId = getYoutubeId(url);
+            
+            if (videoId) {
+                document.getElementById('custom-video').src = `https://www.youtube.com/embed/${videoId}`;
+                document.getElementById('custom-embed-container').classList.remove('hidden');
+            } else {
+                alert('Please enter a valid YouTube URL');
+            }
+        });
+        
+        // Mock search functionality (in a real Flask app, this would connect to YouTube API)
+        document.getElementById('search-button').addEventListener('click', function() {
+            const searchTerm = document.getElementById('search-input').value;
+            if (!searchTerm) return;
+            
+            // In a real application, this would make an AJAX request to a Flask route
+            // that would interact with the YouTube API
+            console.log(`Searching for: ${searchTerm}`);
+            
+            // Show search results section with mock data
+            document.getElementById('search-results').classList.remove('hidden');
+            
+            // Mock search results (in a real app, these would come from the YouTube API)
+            const mockResults = [
+                {
+                    id: 'hZRDkG6iDdY',
+                    title: 'Python Django Tutorial',
+                    channel: 'Corey Schafer',
+                    duration: '41:10'
+                },
+                {
+                    id: 'Z1RJmh_OqeA',
+                    title: 'Flask Tutorial',
+                    channel: 'freeCodeCamp.org',
+                    duration: '53:12'
+                },
+                {
+                    id: 'mrHNSanmqQ4',
+                    title: 'Python Web Development',
+                    channel: 'TechWithTim',
+                    duration: '1:27:44'
+                }
+            ];
+            
+            // Display mock results
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = '';
+            
+            mockResults.forEach(video => {
+                resultsContainer.innerHTML += `
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                        <div class="video-container">
+                            <iframe 
+                                src="https://www.youtube.com/embed/${video.id}" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">${video.title}</h3>
+                            <p class="text-gray-600 text-sm">${video.channel}</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-xs text-gray-500">${video.duration}</span>
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-500 hover:text-red-500"><i class="far fa-heart"></i></button>
+                                    <button class="text-gray-500 hover:text-blue-500"><i class="far fa-share-square"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+        
+        // Implement search on Enter key press
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('search-button').click();
+            }
+        });
+    </script>
+</body>
+</html>
